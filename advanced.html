@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070B14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RE Game">
+<meta name="description" content="Black Harbour real estate study pack: five exits, deal math, Palm Beach County coliving rules.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127968;</text></svg>">
+<title>The Real Estate Game — Study Pack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070B14; --card:#0F172A; --card2:#131D33; --line:#243049;
+    --txt:#E8EEF9; --dim:#93A2BE;
+    --amber:#F5A524; --coral:#FF6B57; --teal:#2DD4A7; --violet:#A78BFA; --sky:#38BDF8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55;
+    -webkit-text-size-adjust:100%;}
+  h1,h2,h3,.mono{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-.02em}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 90px}
+  header{padding:18px 0 6px;border-bottom:1px solid var(--line);margin-bottom:22px}
+  .kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);font-weight:600}
+  h1{font-size:clamp(30px,6vw,52px);line-height:1.04;margin:.25em 0 .2em}
+  .sub{color:var(--dim);font-size:15px;max-width:62ch}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .chip{font-size:12.5px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);
+    color:var(--dim);text-decoration:none;background:#0B1426}
+  .chip:hover{color:var(--txt);border-color:#3A4A6B}
+  section{margin:46px 0 0}
+  h2{font-size:clamp(21px,4.4vw,30px);margin:0 0 6px}
+  .lead{color:var(--dim);font-size:14.5px;margin:0 0 18px;max-width:70ch}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+  .card h3{margin:0 0 8px;font-size:17px}
+  .num{font-family:"Space Grotesk";font-size:26px;color:var(--amber);opacity:.55;line-height:1}
+  .small{font-size:13px;color:var(--dim)}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+  .formula{background:#0A1526;border:1px dashed #2E405F;border-radius:12px;padding:14px 16px;
+    font-family:"JetBrains Mono",monospace;font-size:15px;color:var(--teal);overflow-x:auto}
+  /* exit cards */
+  .ex{border-left:4px solid;position:relative;overflow:hidden}
+  .ex .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+  .ex dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:12px 0 0;font-size:13.5px}
+  .ex dt{color:var(--dim)}
+  .ex dd{margin:0}
+  .ex .money{margin-top:12px;padding-top:10px;border-top:1px dashed #2A3752;font-size:13px;color:var(--dim)}
+  /* calculators */
+  .calc{background:linear-gradient(180deg,#0F172A,#0B1424);border:1px solid var(--line);border-radius:18px;padding:18px}
+  .row{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  label{display:block;font-size:12px;color:var(--dim);margin-bottom:5px;letter-spacing:.04em}
+  input[type=number]{width:100%;background:#0A1120;border:1px solid #27344E;color:var(--txt);
+    border-radius:10px;padding:12px 12px;font-size:16px;font-family:"JetBrains Mono",monospace}
+  input[type=number]:focus{outline:2px solid #2C4A72;border-color:#2C4A72}
+  .out{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-top:16px}
+  .box{background:#0A1526;border:1px solid #22304A;border-radius:12px;padding:12px}
+  .box .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .box .v{font-family:"JetBrains Mono",monospace;font-size:22px;margin-top:4px}
+  .verdict{margin-top:14px;padding:12px 14px;border-radius:12px;font-size:14px;font-weight:600;
+    background:#12203A;border:1px solid #2A3C5C}
+  .go{color:var(--teal)} .no{color:var(--coral)} .warn{color:var(--amber)}
+  /* checklist */
+  .check{display:flex;gap:11px;align-items:flex-start;padding:11px 12px;border-radius:11px;
+    background:#0C1527;border:1px solid #1E2A42;margin-bottom:8px;cursor:pointer;font-size:14px}
+  .check input{margin-top:3px;accent-color:#2DD4A7;width:17px;height:17px}
+  .check.done{opacity:.45;text-decoration:line-through}
+  .bar{height:8px;background:#16213A;border-radius:99px;overflow:hidden;margin:12px 0 4px}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#2DD4A7,#38BDF8);transition:width .25s}
+  /* flashcards */
+  .deck{background:#0F172A;border:1px solid var(--line);border-radius:18px;padding:20px;min-height:240px;
+    display:flex;flex-direction:column;justify-content:space-between}
+  .q{font-size:clamp(17px,3.7vw,22px);font-family:"Space Grotesk";line-height:1.3}
+  .a{margin-top:14px;padding-top:14px;border-top:1px dashed #2A3752;color:var(--teal);font-size:15.5px;display:none}
+  .a.show{display:block}
+  .btns{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+  button{font-family:Inter,sans-serif;font-size:13.5px;font-weight:600;padding:11px 15px;border-radius:10px;
+    border:1px solid #2B3A58;background:#132039;color:var(--txt);cursor:pointer}
+  button:hover{border-color:#3D5077}
+  button.pri{background:var(--teal);color:#04180F;border-color:var(--teal)}
+  .counter{font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace}
+  /* timeline */
+  .tl{border-left:2px solid #24314A;margin-left:8px;padding-left:20px}
+  .tl .it{position:relative;margin-bottom:18px}
+  .tl .it:before{content:"";position:absolute;left:-27px;top:5px;width:11px;height:11px;border-radius:50%;
+    background:var(--amber);box-shadow:0 0 0 4px #0B1424}
+  .tl h4{margin:0;font-family:"Space Grotesk";font-size:15.5px}
+  .tl .t{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--amber);letter-spacing:.06em}
+  .callout{border-radius:14px;padding:16px 18px;font-size:14px;border:1px solid}
+  .c-red{background:#2A1116;border-color:#5C2330;color:#FFD9DE}
+  .c-amb{background:#2A2010;border-color:#5C4519;color:#FFEBC6}
+  .c-grn{background:#0E2A22;border-color:#1E5343;color:#CFF5E8}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #1E2A42;vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+  .foot{margin-top:52px;padding-top:18px;border-top:1px solid var(--line);color:#6E7E9B;font-size:12px}
+  .pill{display:inline-block;font-size:11px;padding:3px 9px;border-radius:99px;background:#16213A;
+    color:var(--dim);margin-right:6px}
+  /* ---------- mobile-first refinements ---------- */
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{overflow-x:hidden;font-size:15.5px}
+  .wrap{padding:20px 16px calc(80px + env(safe-area-inset-bottom))}
+  section{scroll-margin-top:74px}
+  a,button,label,.check,input{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  .chips{
+    position:sticky;top:0;z-index:30;margin:14px -16px 0;padding:10px 16px;
+    background:rgba(7,11,20,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);flex-wrap:nowrap;overflow-x:auto;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    mask-image:linear-gradient(90deg,#000 0,#000 88%,rgba(0,0,0,.15) 100%);
+    -webkit-mask-image:linear-gradient(90deg,#000 0,#000 88%,rgba(0,0,0,.15) 100%)
+  }
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;padding:11px 15px;font-size:13px;min-height:44px;display:inline-flex;align-items:center}
+  header{padding-top:6px;margin-bottom:16px}
+  .sub{font-size:14.5px}
+  .card{padding:16px;border-radius:14px}
+  .calc{padding:16px;border-radius:16px}
+  input[type=number]{padding:13px 12px;min-height:48px}
+  button{min-height:46px;padding:12px 16px}
+  .check{min-height:48px;padding:13px 12px;font-size:14.5px}
+  .ex dl{font-size:13px}
+  table{font-size:12.8px}
+  th,td{padding:8px 6px;word-break:break-word;overflow-wrap:anywhere}
+  .verdict{font-size:13.5px;line-height:1.45}
+  .deck{padding:16px;min-height:auto}
+  #deckBtns button{flex:1 1 44%;min-height:48px}
+  .tl{padding-left:16px}
+  #toTop{
+    position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:40;
+    width:48px;height:48px;border-radius:50%;display:none;align-items:center;justify-content:center;
+    background:#16213A;border:1px solid #2B3A58;color:var(--txt);font-size:18px;
+    box-shadow:0 8px 24px rgba(0,0,0,.5)
+  }
+  #toTop.on{display:flex}
+  @media (max-width:520px){
+    .wrap{padding:16px 14px calc(84px + env(safe-area-inset-bottom))}
+    h1{font-size:32px;margin:.3em 0 .25em}
+    .kicker{font-size:10.5px;letter-spacing:.12em}
+    h2{font-size:22px}
+    .lead{font-size:14px}
+    .grid{gap:11px}
+    .row{grid-template-columns:1fr 1fr;gap:9px}
+    .out{grid-template-columns:1fr 1fr;gap:9px}
+    .box{padding:10px}
+    .box .v{font-size:19px}
+    .box .k{font-size:10px}
+    .num{font-size:22px}
+    .formula{font-size:13px;padding:12px}
+    .foot{font-size:11px}
+    .q{font-size:19px}
+  }
+  @media (max-width:360px){
+    .row,.out{grid-template-columns:1fr}
+  }
+  @media print{body{background:#fff;color:#111}.card,.calc{background:#fff;border-color:#ccc}
+    .chip,.btns,#deckBtns{display:none}section{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<noscript><div style="margin:0;padding:12px 16px;background:#3A2A05;border-bottom:1px solid #6B4E0A;color:#FFEBC6;font:600 13px Inter,system-ui,sans-serif;text-align:center">Calculators and flashcards need JavaScript. Everything else on this page still reads fine.</div></noscript>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Black Harbour · Study Pack · 24 Nov 2026</div>
+  <h1>The Real Estate Game</h1>
+  <p class="sub">Everything you need to understand Santiago's doc in one day — the five exits, the math that decides a deal, the Palm Beach County rules that decide coliving, and the drill that makes it stick.</p>
+  <div class="chips">
+    <a class="chip" href="#game">The game</a>
+    <a class="chip" href="#calc">MAO calculator</a>
+    <a class="chip" href="#exits">5 exits</a>
+    <a class="chip" href="#flipcalc">Deal math</a>
+    <a class="chip" href="#rules">Local rules</a>
+    <a class="chip" href="#checklist">10-min check</a>
+    <a class="chip" href="#deck">Flashcards</a>
+    <a class="chip" href="#day">Today's plan</a>
+  </div>
+</header>
+
+<section id="game">
+  <h2>The game in six lines</h2>
+  <p class="lead">Santiago's lemon line, translated: the money is not in the asset, it's in what you do with it.</p>
+  <div class="grid g3">
+    <div class="card"><div class="num">01</div><h3>You're paid to buy right</h3><p class="small">Profit is decided at the price you negotiate. Everything after that is execution.</p></div>
+    <div class="card"><div class="num">02</div><h3>Five exits, no more</h3><p class="small">Wholesale · flip · buy &amp; hold · coliving · multifamily. Same house, five businesses.</p></div>
+    <div class="card"><div class="num">03</div><h3>Know the way out first</h3><p class="small">An exit strategy is how the money comes back. If you can't name the buyer, don't sign.</p></div>
+    <div class="card"><div class="num">04</div><h3>The buy creates the equity</h3><p class="small">Buying a dollar for 70 cents creates the gap that becomes your profit or your cushion.</p></div>
+    <div class="card"><div class="num">05</div><h3>More income per building</h3><p class="small">Coliving and multifamily win by not depending on one tenant — if the code allows it.</p></div>
+    <div class="card"><div class="num">06</div><h3>Your lane is deal flow</h3><p class="small">Santiago runs crews. You run the machine that finds, qualifies and follows up on sellers.</p></div>
+  </div>
+</section>
+
+<section id="calc">
+  <h2>The only formula you must memorize</h2>
+  <p class="lead">MAO = Maximum Allowable Offer — the most you can pay and still make money. Type any two numbers.</p>
+  <div class="calc">
+    <div class="row">
+      <div><label>ARV — fixed-up value</label><input type="number" id="arv" value="470000" step="1000"></div>
+      <div><label>Rehab budget</label><input type="number" id="reb" value="65000" step="1000"></div>
+      <div><label>Asking price (optional)</label><input type="number" id="ask" value="330000" step="1000"></div>
+    </div>
+    <div class="out">
+      <div class="box"><div class="k">Max offer · 70%</div><div class="v" id="m70" style="color:var(--teal)">—</div></div>
+      <div class="box"><div class="k">Max offer · 75%</div><div class="v" id="m75" style="color:var(--sky)">—</div></div>
+      <div class="box"><div class="k">Max offer · 80%</div><div class="v" id="m80" style="color:var(--amber)">—</div></div>
+      <div class="box"><div class="k">Gap vs 70% max</div><div class="v" id="cu" style="color:var(--violet)">—</div></div>
+    </div>
+    <div class="verdict" id="verd">—</div>
+    <p class="small" style="margin:12px 0 0">The 70% rule is a safety margin, not a law. 80% is a thin deal. Below 70% is where you want to live.</p>
+  </div>
+</section>
+
+<section id="exits">
+  <h2>The five exits</h2>
+  <p class="lead">For each one, ask the same five questions: who does the work, how you get paid, how much cash, how fast, what can go wrong.</p>
+  <div class="grid g2">
+
+    <div class="card ex" style="border-left-color:var(--amber)">
+      <div class="tag" style="color:var(--amber)">01 · Wholesale / assignment</div>
+      <h3>Sell the contract, not the house</h3>
+      <dl>
+        <dt>How</dt><dd>Sign a purchase contract low, assign it to a cash buyer for more</dd>
+        <dt>Paid by</dt><dd>The assignment fee</dd>
+        <dt>Cash</dt><dd>Earnest money only ($500–$5,000)</dd>
+        <dt>Speed</dt><dd>2–8 weeks</dd>
+        <dt>Risk</dt><dd>Must be assignable · buyer list must exist</dd>
+      </dl>
+      <div class="money">Contract $265k → assigned $288k = <b style="color:var(--amber)">$23k fee</b>, ~$20.5k net. Your price must sit at or below the end buyer's own MAO.</div>
+    </div>
+
+    <div class="card ex" style="border-left-color:var(--coral)">
+      <div class="tag" style="color:var(--coral)">02 · Flip</div>
+      <h3>Buy, fix, sell</h3>
+      <dl>
+        <dt>How</dt><dd>Renovate and sell at ARV</dd>
+        <dt>Paid by</dt><dd>The equity gap at sale</dd>
+        <dt>Cash</dt><dd>Most of all five — hard money + rehab cash</dd>
+        <dt>Speed</dt><dd>4–8 months</dd>
+        <dt>Risk</dt><dd>Overruns · timeline · holding costs</dd>
+      </dl>
+      <div class="money">$310k buy + $65k rehab + $74k costs = $448.9k all-in → sells $470k = <b style="color:var(--coral)">$21.1k profit</b>. At $275k buy: $59.2k. Same house.</div>
+    </div>
+
+    <div class="card ex" style="border-left-color:var(--teal)">
+      <div class="tag" style="color:var(--teal)">03 · Buy &amp; hold</div>
+      <h3>Rent it, keep it</h3>
+      <dl>
+        <dt>How</dt><dd>Buy and rent to one household</dd>
+        <dt>Paid by</dt><dd>Monthly cash flow + appreciation</dd>
+        <dt>Cash</dt><dd>20–25% down on 1–4 units</dd>
+        <dt>Speed</dt><dd>Years</dd>
+        <dt>Risk</dt><dd>Vacancy · maintenance · rates</dd>
+      </dl>
+      <div class="money">4-plex $650k: NOI <b style="color:var(--teal)">$54.8k</b> → $1,244/mo cash flow, 8.4% cap, 9.2% cash-on-cash, DSCR 1.37.</div>
+    </div>
+
+    <div class="card ex" style="border-left-color:var(--violet)">
+      <div class="tag" style="color:var(--violet)">04 · Coliving</div>
+      <h3>Rent by the room</h3>
+      <dl>
+        <dt>How</dt><dd>Rooms, efficiencies, house split, big houses</dd>
+        <dt>Paid by</dt><dd>More rent per building</dd>
+        <dt>Cash</dt><dd>Down payment + furnishing ($3–4k/room)</dd>
+        <dt>Speed</dt><dd>Weeks to fill, ongoing work</dd>
+        <dt>Risk</dt><dd><b>Zoning limits</b> · turnover · shared-space conflict</dd>
+      </dl>
+      <div class="money">5 rooms × $950 = <b style="color:var(--violet)">$57k/yr</b> vs $38.4k as one family. 3.4 rooms just to match the rent; 4.4 of 5 to beat it after ~$12k/yr of extra costs.</div>
+    </div>
+
+    <div class="card ex" style="border-left-color:var(--sky)">
+      <div class="tag" style="color:var(--sky)">05 · Multifamily</div>
+      <h3>Many units, one building</h3>
+      <dl>
+        <dt>How</dt><dd>Duplex through 40+ units</dd>
+        <dt>Paid by</dt><dd>Rent × units, valued on NOI</dd>
+        <dt>Cash</dt><dd>25–35% down on 5+ units</dd>
+        <dt>Speed</dt><dd>Long hold, forced appreciation</dd>
+        <dt>Risk</dt><dd>Commercial loans · scaling ops</dd>
+      </dl>
+      <div class="money">Value ≈ NOI ÷ cap rate. Raise NOI $54.8k → $65k at 8.4% and the building goes $650k → ~$773k. That's forced appreciation.</div>
+    </div>
+
+    <div class="card ex" style="border-left-color:#64748B">
+      <div class="tag" style="color:#94A3B8">The non-negotiables</div>
+      <h3>Entry price &amp; exit clarity</h3>
+      <dl>
+        <dt>Test 1</dt><dd>Am I buying below what it's worth fixed up?</dd>
+        <dt>Test 2</dt><dd>Do I already know who buys or rents this?</dd>
+        <dt>If both</dt><dd>Proceed</dd>
+        <dt>If either fails</dt><dd>Walk. Every time.</dd>
+      </dl>
+      <div class="money">Bad deals aren't bad properties. They're bad entries with unclear exits.</div>
+    </div>
+  </div>
+</section>
+
+<section id="flipcalc">
+  <h2>Run a flip in 20 seconds</h2>
+  <p class="lead">This is the drill that makes real estate click: change the purchase price and watch profit move dollar for dollar.</p>
+  <div class="calc">
+    <div class="row">
+      <div><label>Purchase price</label><input type="number" id="fp" value="310000" step="5000"></div>
+      <div><label>Rehab</label><input type="number" id="fr" value="65000" step="5000"></div>
+      <div><label>ARV (sale price)</label><input type="number" id="fa" value="470000" step="5000"></div>
+      <div><label>Months held</label><input type="number" id="fm" value="5" step="1"></div>
+    </div>
+    <div class="out">
+      <div class="box"><div class="k">All-in cost</div><div class="v" id="fall" style="color:var(--dim)">—</div></div>
+      <div class="box"><div class="k">Profit</div><div class="v" id="fpft" style="color:var(--teal)">—</div></div>
+      <div class="box"><div class="k">Cash needed</div><div class="v" id="fcash" style="color:var(--sky)">—</div></div>
+      <div class="box"><div class="k">Return on cash</div><div class="v" id="froi" style="color:var(--amber)">—</div></div>
+    </div>
+    <div class="verdict" id="fverd">—</div>
+    <p class="small" style="margin:12px 0 0">Assumes: 2.5% buy closing, 8% sell closing, hard money at 90% LTV, 12% interest, 2 points, $1,800/mo taxes+insurance. Illustrative, not a quote.</p>
+  </div>
+</section>
+
+<section id="colive">
+  <h2>Coliving vs one family</h2>
+  <p class="lead">Sell the pizza by the slice. The question isn't whether the rent is higher — it's whether the extra rent survives the extra costs.</p>
+  <div class="calc">
+    <div class="row">
+      <div><label>Rooms</label><input type="number" id="cr" value="5" step="1"></div>
+      <div><label>Rent per room</label><input type="number" id="crr" value="950" step="50"></div>
+      <div><label>Single-family rent</label><input type="number" id="csf" value="3200" step="100"></div>
+      <div><label>Extra monthly costs</label><input type="number" id="cex" value="1000" step="100"></div>
+    </div>
+    <div class="out">
+      <div class="box"><div class="k">Coliving / yr</div><div class="v" id="cyr" style="color:var(--violet)">—</div></div>
+      <div class="box"><div class="k">One family / yr</div><div class="v" id="csfr" style="color:var(--dim)">—</div></div>
+      <div class="box"><div class="k">Net gain / yr</div><div class="v" id="cnet" style="color:var(--teal)">—</div></div>
+      <div class="box"><div class="k">Rooms to break even</div><div class="v" id="cbe" style="color:var(--amber)">—</div></div>
+    </div>
+    <div class="verdict" id="cverd">—</div>
+    <p class="small" style="margin:12px 0 0">"Extra monthly costs" = utilities, internet, cleaning, supplies, furnishing amortized, higher turnover. Ignoring this is how coliving math lies to you.</p>
+  </div>
+</section>
+
+<section id="rules">
+  <h2>The rule that decides whether coliving is even legal</h2>
+  <p class="lead">Santiago wrote it in one line: <em>"No toda casa se puede operar de esta manera."</em> Here is what that means in your market.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="color:var(--coral)">Palm Beach County (unincorporated)</h3>
+      <p class="small">Verified from the county's own zoning documents:</p>
+      <table>
+        <tr><th>Rule</th><th>What it says</th></tr>
+        <tr><td>Family</td><td>Up to <b>4 unrelated</b> people count as one household</td></tr>
+        <tr><td>Above 4</td><td>Treated as a <b>Congregate Living Facility</b> — a different land use</td></tr>
+        <tr><td>Where CLF goes</td><td><b>RM district + some PUDs</b>, Class A conditional use permit</td></tr>
+        <tr><td>Sleeping room</td><td>Minimum <b>70 sq ft</b> per single occupant</td></tr>
+      </table>
+      <p class="small" style="margin-top:12px">So a 5-room coliving house in single-family zoning is <b>not automatically legal</b>. Stay at 4, buy in multifamily zoning, or get the permit. Each has a price.</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--sky)">The city, not the county</h3>
+      <p class="small">Most PBC addresses sit inside a city with its own code: Boca Raton, Delray Beach, Boynton Beach, West Palm Beach, Lake Worth Beach, Riviera Beach, Wellington, Royal Palm Beach, Greenacres…</p>
+      <p class="small">Before promising a room count, check the address for:</p>
+      <ul class="small" style="margin:8px 0 0;padding-left:18px">
+        <li>Unrelated-occupant limit</li>
+        <li>Short-term vs long-term rental rules</li>
+        <li>Parking requirements</li>
+        <li>Fire/safety, egress, detectors</li>
+        <li>Business tax receipt</li>
+        <li>HOA / deed restrictions</li>
+        <li>Insurance actually covering room rentals</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout c-red" style="margin-top:14px">
+    <b>This is study material, not legal advice.</b> Before Black Harbour operates one coliving house, a Florida real estate attorney confirms the allowed room count for that exact address — in writing.
+  </div>
+</section>
+
+<section id="checklist">
+  <h2>The 10-minute deal check</h2>
+  <p class="lead">Run this on every lead before it reaches Santiago. Tap each line as you confirm it.</p>
+  <div class="bar"><i id="bar"></i></div>
+  <div class="counter" id="prog">0 / 12 confirmed</div>
+  <div style="margin-top:14px">
+    <label class="check"><input type="checkbox"> Address, city (not just county), beds/baths/sq ft, year built</label>
+    <label class="check"><input type="checkbox"> Roof age, HVAC age, flood zone</label>
+    <label class="check"><input type="checkbox"> HOA? dues? rental restrictions?</label>
+    <label class="check"><input type="checkbox"> Current occupancy, leases, rents being paid</label>
+    <label class="check"><input type="checkbox"> 3–6 sold comps from the last 6 months → ARV</label>
+    <label class="check"><input type="checkbox"> Rehab estimated line by line + 15% contingency</label>
+    <label class="check"><input type="checkbox"> MAO at 70% and 75% computed</label>
+    <label class="check"><input type="checkbox"> Exit named: who buys or rents this, at what price</label>
+    <label class="check"><input type="checkbox"> Insurance quote requested (the Florida deal-killer)</label>
+    <label class="check"><input type="checkbox"> Tax bill checked — and confirmed it will reset</label>
+    <label class="check"><input type="checkbox"> Liens, back taxes, probate, title issues</label>
+    <label class="check"><input type="checkbox"> Seller motive, what they owe, how fast they need out</label>
+  </div>
+</section>
+
+<section id="deck">
+  <h2>Flashcards <span class="counter" id="cnt"></span></h2>
+  <p class="lead">Answer out loud before you flip. Ten minutes a day beats a three-hour cram.</p>
+  <div class="deck">
+    <div>
+      <div class="q" id="q">Loading…</div>
+      <div class="a" id="a"></div>
+    </div>
+    <div class="btns" id="deckBtns">
+      <button class="pri" id="reveal">Show answer</button>
+      <button id="next">Next →</button>
+      <button id="prev">← Back</button>
+      <button id="shuffle">Shuffle</button>
+    </div>
+  </div>
+</section>
+
+<section id="day">
+  <h2>Today's plan (and the 2-hour version)</h2>
+  <p class="lead">Full day = 6h15 on a Saturday. Weeknight = 2 hours. Both end with a quiz and a voice memo.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="color:var(--amber)">Full day</h3>
+      <div class="tl" style="margin-top:12px">
+        <div class="it"><div class="t">10 MIN</div><h4>Prime</h4><div class="small">Read the six lines + the 12 words. No memorizing.</div></div>
+        <div class="it"><div class="t">40 MIN</div><h4>Core idea + vocabulary</h4><div class="small">Then write all 12 terms from memory.</div></div>
+        <div class="it"><div class="t">75 MIN</div><h4>The five exits</h4><div class="small">Say each one out loud: work · pay · cash · speed · risk.</div></div>
+        <div class="it"><div class="t">60 MIN</div><h4>Math drill</h4><div class="small">MAO on 5 real listings. By hand, then calculator.</div></div>
+        <div class="it"><div class="t">20 MIN</div><h4>Walk</h4><div class="small">No phone. Consolidation happens off-screen.</div></div>
+        <div class="it"><div class="t">45 MIN</div><h4>Local rules</h4><div class="small">Room limit for one county address + one city address.</div></div>
+        <div class="it"><div class="t">30 MIN</div><h4>Teach-back</h4><div class="small">Voice memo: all five exits, no notes.</div></div>
+        <div class="it"><div class="t">25 MIN</div><h4>Quiz</h4><div class="small">Guide closed. Score it. Misses become flashcards.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--sky)">Tonight, 2 hours</h3>
+      <div class="tl" style="margin-top:12px">
+        <div class="it"><div class="t">15 MIN</div><h4>Six lines + 12 words</h4></div>
+        <div class="it"><div class="t">30 MIN</div><h4>Five exits, out loud from memory</h4></div>
+        <div class="it"><div class="t">20 MIN</div><h4>MAO on 3 real listings</h4></div>
+        <div class="it"><div class="t">15 MIN</div><h4>The 4-unrelated rule + "check the city"</h4></div>
+        <div class="it"><div class="t">20 MIN</div><h4>Quiz, closed book</h4></div>
+        <div class="it"><div class="t">10 MIN</div><h4>90-second voice memo</h4></div>
+        <div class="it"><div class="t">10 MIN</div><h4>Make cards from your misses</h4></div>
+      </div>
+      <div class="callout c-grn" style="margin-top:6px">
+        <b>The pattern that makes it permanent:</b> review tomorrow (10 min) · day 3 (20 min) · day 7 (15 min) · day 14 (20 min) · day 30 (do a real deal).
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="guard">
+  <h2>Guardrails — what you never do</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>The Florida line on wholesaling</h3>
+      <p class="small"><b>Verified:</b> you do <b>not</b> need a real estate license to assign your own purchase contract — you're a principal, not a broker.</p>
+      <p class="small">You <b>do</b> cross the line the moment you market or negotiate someone else's property for a fee. That's unlicensed brokerage.</p>
+      <p class="small">Earnest money lives in a title company or attorney escrow. Never your pocket.</p>
+    </div>
+    <div class="card">
+      <h3>The costs that quietly kill deals</h3>
+      <table>
+        <tr><td>Buy closing</td><td>~1.5–2.5%</td></tr>
+        <tr><td>Sell closing</td><td>~6–8% all-in</td></tr>
+        <tr><td>Doc stamps (deed)</td><td>$0.70 per $100</td></tr>
+        <tr><td>Holding</td><td>taxes + insurance + utilities / month</td></tr>
+        <tr><td>Hard money</td><td>10–13% + 2–4 points</td></tr>
+        <tr><td>Taxes on fee income</td><td>set aside 25–30%</td></tr>
+      </table>
+      <p class="small" style="margin-top:10px">In Florida, insurance is the number that kills more deals than price ever does. Quote it before you fall in love.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ask">
+  <h2>Questions to bring to the lawyer / CPA</h2>
+  <div class="card">
+    <ol class="small" style="margin:0;padding-left:20px">
+      <li>Which contract do we use, and does it allow assignment + a nominee?</li>
+      <li>Who writes our room-rental leases, and are they compliant for each city we operate in?</li>
+      <li>One LLC per deal, or one holding company?</li>
+      <li>How is the assignment fee taxed — and do doc stamps apply to it?</li>
+      <li>Which insurance policy actually covers room-by-room occupancy?</li>
+      <li>For BH Rentals turns: what's our liability working inside someone else's house?</li>
+    </ol>
+  </div>
+</section>
+
+<div class="foot">
+  <span class="pill">Source</span> Santiago Campillo, "Real estate game - Black Harbour (para Juan)" · 24 Nov 2026<br>
+  <span class="pill">Verified</span> Palm Beach County ULDC (unrelated occupants, CLF, 70 sq ft) · FL doc stamps ($0.70/$100) · FL wholesaling license position (Widerman Malek)<br>
+  <span class="pill">Illustrative</span> All deal numbers, rates and rehab ranges — built to teach the math, not to quote the market.<br>
+  <span class="pill">Not advice</span> Attorney, CPA and lender confirm before any money moves.
+</div>
+
+<button id="toTop" aria-label="Back to top">&#8593;</button>
+</div>
+<script>
+const cards = [{"q": "In one sentence, where does real estate profit come from?", "a": "Buying at the right price with a clear exit already planned.", "t": "core"}, {"q": "Name the five exits.", "a": "Wholesale (assignment), flip, buy & hold, coliving, multifamily.", "t": "exit"}, {"q": "What is an exit strategy (estrategia de salida)?", "a": "The plan for how the money comes back out of the deal.", "t": "core"}, {"q": "What does ARV stand for and mean?", "a": "After Repair Value - what the property sells for once fixed up.", "t": "terms"}, {"q": "What are comps?", "a": "3-6 recent sales of similar properties nearby, same size/condition, used to prove the ARV.", "t": "terms"}, {"q": "What is MAO and the formula?", "a": "Maximum Allowable Offer = (ARV x 0.70) - Rehab. The most you can pay.", "t": "math"}, {"q": "ARV $400,000, rehab $50,000. What is MAO at 70%?", "a": "(400,000 x 0.70) - 50,000 = $230,000.", "t": "math"}, {"q": "ARV $470,000, rehab $65,000. MAO at 70% and at 75%?", "a": "70% -> $264,000. 75% -> $287,500.", "t": "math"}, {"q": "What is wholesale / assignment?", "a": "Signing a purchase contract at a low price then assigning (selling) that contract to another buyer for a fee. You never own the house.", "t": "exit"}, {"q": "How does a wholesaler get paid?", "a": "The assignment fee: the gap between their contract price and the price the end buyer pays for the contract.", "t": "exit"}, {"q": "What is the critical rule for an assignment price?", "a": "It must be at or below the end buyer's own MAO, or nobody buys it.", "t": "exit"}, {"q": "Contract at $265,000 assigned at $288,000 - gross fee?", "a": "$23,000. Net after $2,500 costs: $20,500.", "t": "math"}, {"q": "How much cash does a wholesale deal usually need?", "a": "Earnest money only, typically $500-$5,000, plus marketing.", "t": "exit"}, {"q": "What is earnest money (deposito de buena fe)?", "a": "A deposit you put down when signing to prove you are serious. It can be lost if you walk without a contract reason.", "t": "terms"}, {"q": "What is the due diligence / inspection period?", "a": "A window in the contract where you can cancel and get your deposit back after inspecting.", "t": "terms"}, {"q": "What does a flip require that a wholesale does not?", "a": "Actually buying and renovating the property - so much more cash, time, and construction risk.", "t": "exit"}, {"q": "In the flip example, purchase $310k, rehab $65k, ARV $470k, all-in was $448,880. Profit?", "a": "$21,120 on about $103,750 of cash = 20.4% ROI in about 5 months.", "t": "math"}, {"q": "How much extra profit comes from each $10,000 off the purchase price?", "a": "$10,000, roughly dollar for dollar. That is why the buy is everything.", "t": "math"}, {"q": "Each extra $10,000 of unplanned rehab costs how much profit?", "a": "$10,000. Contingency of 15% exists for this.", "t": "math"}, {"q": "Each $10,000 higher sale price adds how much profit?", "a": "About $9,200, because 8% goes to selling costs.", "t": "math"}, {"q": "What are the main costs people forget in a flip?", "a": "Holding costs, buy and sell closing costs, hard money points and interest, and the 15% rehab contingency.", "t": "math"}, {"q": "How long does a flip usually take vs a wholesale?", "a": "Flip 4-8 months. Wholesale 2-8 weeks.", "t": "exit"}, {"q": "What is buy and hold?", "a": "Buying and keeping the property to rent it, so income arrives monthly and the horizon is years.", "t": "exit"}, {"q": "What is NOI?", "a": "Net Operating Income = rent collected minus vacancy and operating costs, before loan payments.", "t": "terms"}, {"q": "What is cap rate?", "a": "NOI divided by purchase price. The building's return independent of how you finance it.", "t": "terms"}, {"q": "What is cash-on-cash return?", "a": "Annual cash flow divided by the cash you invested. 6-10% is decent.", "t": "terms"}, {"q": "What is DSCR?", "a": "Debt Service Coverage Ratio = NOI divided by annual loan payments. Lenders want 1.20 or higher.", "t": "terms"}, {"q": "In the 4-plex example ($650k, 25% down, 7.25%), what were NOI, cash flow and DSCR?", "a": "NOI $54,834/yr, cash flow $14,927/yr ($1,244/mo), DSCR 1.37, cap rate 8.4%.", "t": "math"}, {"q": "What is forced appreciation?", "a": "Raising a building's NOI so its value rises, because value is approximately NOI divided by cap rate.", "t": "terms"}, {"q": "How does a DSCR loan qualify a borrower?", "a": "On the property's rent covering the payment, not the borrower's W-2 income.", "t": "funding"}, {"q": "What is the difference between a 1-4 unit loan and a 5+ unit loan?", "a": "1-4 units is residential (comps, 20-25% down, better rates). 5+ is commercial (NOI/cap rate, 25-35% down).", "t": "funding"}, {"q": "What is coliving?", "a": "Renting one property to several people, each paying for their own space, instead of to one family.", "t": "coliving"}, {"q": "Name the four coliving forms Santiago listed.", "a": "Room by room with shared areas, efficiencies, house split, and large houses operated the same way.", "t": "coliving"}, {"q": "Why does coliving earn more than single-family rent?", "a": "You sell housing in smaller pieces - 5 rooms at $950 beats one family at $3,200.", "t": "coliving"}, {"q": "5 rooms at $950/mo vs one family at $3,200/mo - annual difference?", "a": "$57,000 vs $38,400 = $18,600 more per year before extra costs.", "t": "math"}, {"q": "With one room vacant, does 5-room coliving still beat single-family?", "a": "Yes, but tighter than it looks - $45,600 vs $38,400. You need 4.4 of 5 rooms filled to beat one family after extra coliving costs.", "t": "math"}, {"q": "What extra costs does coliving add?", "a": "Furnishing, utilities and internet, higher turnover and cleaning, more screening, more tenant conflict, insurance complexity.", "t": "coliving"}, {"q": "Roughly what does furnishing cost per room?", "a": "$3,000-$4,000 per room, usually paid back in under 2 years.", "t": "coliving"}, {"q": "What is a house split?", "a": "Dividing one house into separate rooms or small units, each with its own rent.", "t": "coliving"}, {"q": "What is the difference between coliving and multifamily?", "a": "Coliving shares one house with shared common areas. Multifamily is a building designed with separate units.", "t": "coliving"}, {"q": "Palm Beach County: how many unrelated people count as a family?", "a": "Up to four. More than four unrelated occupants is treated as a Congregate Living Facility.", "t": "legal"}, {"q": "In unincorporated Palm Beach County, where can a new Congregate Living Facility go?", "a": "In the RM multi-family district and some PUDs, with a Class A conditional use permit - not in standard single-family districts.", "t": "legal"}, {"q": "What is the minimum floor area for a sleeping room in Palm Beach County?", "a": "70 square feet for one occupant.", "t": "legal"}, {"q": "Name four things to verify per address before operating coliving.", "a": "City rules on unrelated occupants, short-term vs long-term rules, parking, fire/safety, HOA restrictions, insurance coverage.", "t": "legal"}, {"q": "Is the city or the county the rule-maker for a property?", "a": "The city, if the property is inside a municipality. Most of PBC's addresses are inside a city with its own code.", "t": "legal"}, {"q": "Do you need a Florida real estate license to wholesale your own contract?", "a": "No - you are a principal in the transaction. You do need one to act as a broker or agent for someone else's property.", "t": "legal"}, {"q": "Where should earnest money be held?", "a": "In a title company or attorney escrow, never in the wholesaler's pocket.", "t": "legal"}, {"q": "Who should review your first contract?", "a": "A Florida real estate attorney. Contracts are not DIY in a first deal.", "t": "legal"}, {"q": "What are Florida documentary stamps on a deed?", "a": "$0.70 per $100 of price. On $470,000 that is $3,290.", "t": "funding"}, {"q": "What is the Florida closing cost rule of thumb?", "a": "About 1.5-2.5% on the buy side, and 6-8% all-in on the sell side.", "t": "funding"}, {"q": "What is the Florida deal-killer people skip?", "a": "The insurance quote. Old roofs and storm exposure make some properties uninsurable or very expensive.", "t": "funding"}, {"q": "Do property taxes stay the same when a property changes hands?", "a": "No. They are reassessed, and a seller's homestead exemption does not transfer. Their bill is not yours.", "t": "funding"}, {"q": "What is hard money and what does it cost?", "a": "Short-term private lending for flips, roughly 10-13% interest plus 2-4 points.", "t": "funding"}, {"q": "What is seller financing?", "a": "The seller acts as the bank, accepting payments instead of a lump sum.", "t": "funding"}, {"q": "What is subject-to?", "a": "Buying a property while leaving the seller's existing mortgage in place. Powerful and legally delicate - get review.", "t": "funding"}, {"q": "Name the six questions to qualify a motivated seller.", "a": "What and where; why sell now; what is owed; what condition; what do you need to walk away with; how fast and can I see it.", "t": "ops"}, {"q": "Which comes first: a buyer's list or a signed contract?", "a": "The buyer's list. No cash buyers means nothing to assign.", "t": "exit"}, {"q": "How many touches before most deals close?", "a": "Typically the 4th to 8th contact. Follow-up is a system, not a talent.", "t": "ops"}, {"q": "What is the unfair advantage BH Rentals has for deal flow?", "a": "Turn visits put you inside properties and in front of landlords who are getting tired - a free lead source.", "t": "ops"}, {"q": "Who does the work in each exit?", "a": "Wholesale: you find it, the end buyer renovates. Flip: you renovate. Buy and hold: tenants and a manager. Coliving: you operate rooms. Multifamily: a property manager.", "t": "exit"}, {"q": "What is the 10-minute deal analysis sequence?", "a": "Score the property, pull comps for ARV, estimate rehab line by line, run MAO, check the exit and the buyer, check legal/insurance guardrails.", "t": "ops"}, {"q": "What is the one number to never guess?", "a": "ARV. If the comps are wrong, every other number is wrong.", "t": "math"}, {"q": "What makes a deal fail even with good numbers?", "a": "No buyer at your price, legal limits on room count, insurance cost, or construction overruns.", "t": "core"}, {"q": "What should you set aside from an assignment fee for taxes?", "a": "Roughly 25-30% until a CPA gives you the real figure.", "t": "legal"}];
+let i = 0, order = cards.map((_, k) => k);
+
+const money = n => "$" + Math.round(n).toLocaleString("en-US");
+const el = id => document.getElementById(id);
+
+// ---------- MAO ----------
+function mao(){
+  const arv = +el("arv").value || 0, reb = +el("reb").value || 0, ask = +el("ask").value || 0;
+  const m70 = arv*0.70 - reb, m75 = arv*0.75 - reb, m80 = arv*0.80 - reb;
+  el("m70").textContent = money(m70); el("m75").textContent = money(m75); el("m80").textContent = money(m80);
+  const gap = ask ? ask - m70 : 0;
+  el("cu").textContent = ask ? (gap <= 0 ? money(-gap) + " under" : money(gap) + " over") : "—";
+  el("cu").style.color = gap > 0 ? "var(--coral)" : "var(--teal)";
+  let t = "", cls = "";
+  if(!ask){ t = "Type an asking price to see the verdict."; }
+  else if(ask <= m70){ t = "✅ At " + money(ask) + " this is a real deal — " + money(m70-ask) + " below your 70% number."; cls="go"; }
+  else if(ask <= m75){ t = "⚠️ Workable but thin — " + money(ask-m70) + " above the 70% rule. Negotiate or walk."; cls="warn"; }
+  else { t = "❌ Does not work — " + money(ask-m70) + " over your max. No buyer will pay this at 70–75%."; cls="no"; }
+  el("verd").innerHTML = '<span class="'+cls+'">'+t+'</span>';
+}
+["arv","reb","ask"].forEach(id => el(id).addEventListener("input", mao)); mao();
+
+// ---------- flip ----------
+function flip(){
+  const p = +el("fp").value||0, r = +el("fr").value||0, a = +el("fa").value||0, m = +el("fm").value||0;
+  const bc = p*0.025, sc = a*0.08, hm = p*0.9, pts = hm*0.02, intr = hm*0.12*(m/12), hold = 1800*m;
+  const all = p + r + bc + sc + pts + intr + hold;
+  const pft = a - all, cash = p*0.10 + r + bc, roi = cash ? pft/cash : 0;
+  el("fall").textContent = money(all);
+  el("fpft").textContent = money(pft); el("fpft").style.color = pft>0? "var(--teal)":"var(--coral)";
+  el("fcash").textContent = money(cash);
+  el("froi").textContent = (roi*100).toFixed(1) + "%";
+  let t, c;
+  if(pft <= 0){ t = "❌ This flip loses money. The buy price is wrong, not the house."; c="no"; }
+  else if(roi < 0.15){ t = "⚠️ Thin: " + money(pft) + " profit on " + money(cash) + " of cash. Any surprise erases it."; c="warn"; }
+  else { t = "✅ " + money(pft) + " profit on " + money(cash) + " of cash = " + (roi*100).toFixed(1) + "% in " + m + " months."; c="go"; }
+  el("fverd").innerHTML = '<span class="'+c+'">'+t+'</span>';
+}
+["fp","fr","fa","fm"].forEach(id => el(id).addEventListener("input", flip)); flip();
+
+// ---------- coliving ----------
+function colive(){
+  const rooms = +el("cr").value||0, rr = +el("crr").value||0, sfr = +el("csf").value||0, ex = +el("cex").value||0;
+  const cy = rooms*rr*12, sy = sfr*12, net = cy - sy - ex*12;
+  el("cyr").textContent = money(cy); el("csfr").textContent = money(sy); el("cnet").textContent = money(net);
+  el("cnet").style.color = net>0? "var(--teal)":"var(--coral)";
+  const be = (sfr + ex) / (rr || 1);
+  el("cbe").textContent = isFinite(be)? be.toFixed(1)+" rooms" : "—";
+  let t,c;
+  if(net <= 0){ t = "❌ After real costs, coliving doesn't beat one family here."; c="no"; }
+  else if(net < 6000){ t = "⚠️ Only " + money(net) + "/yr extra for a lot more work and legal risk."; c="warn"; }
+  else { t = "✅ " + money(net) + "/yr more than one family — if the city allows " + rooms + " unrelated occupants."; c="go"; }
+  el("cverd").innerHTML = '<span class="'+c+'">'+t+'</span>';
+}
+["cr","crr","csf","cex"].forEach(id => el(id).addEventListener("input", colive)); colive();
+
+// ---------- checklist ----------
+const checks = [...document.querySelectorAll(".check input")];
+function prog(){
+  const done = checks.filter(c => c.checked).length;
+  el("bar").style.width = (done/checks.length*100) + "%";
+  el("prog").textContent = done + " / " + checks.length + " confirmed";
+  checks.forEach(c => c.closest(".check").classList.toggle("done", c.checked));
+}
+checks.forEach(c => c.addEventListener("change", prog)); prog();
+
+// ---------- flashcards ----------
+function render(){
+  const c = cards[order[i]];
+  el("q").textContent = c.q;
+  el("a").textContent = c.a;
+  el("a").classList.remove("show");
+  el("cnt").textContent = (i+1) + " / " + cards.length + " · " + c.t;
+}
+el("reveal").onclick = () => el("a").classList.toggle("show");
+el("next").onclick = () => { i = (i+1) % cards.length; render(); };
+el("prev").onclick = () => { i = (i-1+cards.length) % cards.length; render(); };
+el("shuffle").onclick = () => {
+  order.sort(() => Math.random() - 0.5); i = 0; render();
+};
+document.addEventListener("keydown", e => {
+  if(e.key === " "){ e.preventDefault(); el("a").classList.toggle("show"); }
+  if(e.key === "ArrowRight"){ i = (i+1)%cards.length; render(); }
+  if(e.key === "ArrowLeft"){ i = (i-1+cards.length)%cards.length; render(); }
+});
+render();
+
+// ---------- back to top ----------
+const tt = el("toTop");
+addEventListener("scroll", () => tt.classList.toggle("on", scrollY > 700), {passive:true});
+tt.onclick = () => scrollTo({top:0, behavior:"smooth"});
+</script>
+</body>
+</html>

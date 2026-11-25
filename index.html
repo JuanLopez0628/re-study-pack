@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070B14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RE Plain English">
+<meta name="description" content="Real estate explained in plain English, from zero. One house, round numbers, every acronym decoded.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127968;</text></svg>">
+<title>Real Estate in Plain English — Black Harbour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070B14; --card:#0F172A; --card2:#0A1526; --line:#243049;
+    --txt:#E8EEF9; --dim:#9BAAC6;
+    --green:#2DD4A7; --amber:#F5A524; --red:#FF7A66; --blue:#5EA9FF; --violet:#B49BFF;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--txt);overflow-x:hidden;
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.62;
+    -webkit-tap-highlight-color:transparent}
+  h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-.02em;line-height:1.15}
+  .wrap{max-width:760px;margin:0 auto;padding:18px 16px calc(80px + env(safe-area-inset-bottom))}
+  header{padding:8px 0 14px}
+  .kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:700}
+  h1{font-size:clamp(30px,8vw,44px);margin:.3em 0 .2em}
+  .lede{color:var(--dim);font-size:16px;margin:0}
+  nav.chips{position:sticky;top:0;z-index:30;display:flex;gap:8px;overflow-x:auto;
+    margin:14px -16px 0;padding:10px 16px;background:rgba(7,11,20,.94);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    mask-image:linear-gradient(90deg,#000 0,#000 90%,rgba(0,0,0,.2) 100%);
+    -webkit-mask-image:linear-gradient(90deg,#000 0,#000 90%,rgba(0,0,0,.2) 100%)}
+  nav.chips::-webkit-scrollbar{display:none}
+  nav.chips a{flex:0 0 auto;min-height:44px;display:inline-flex;align-items:center;
+    padding:10px 14px;border-radius:99px;border:1px solid var(--line);background:#0B1426;
+    color:var(--dim);text-decoration:none;font-size:13.5px;font-weight:600}
+  nav.chips a:active{color:var(--txt);border-color:#3A4A6B}
+  section{margin-top:40px;scroll-margin-top:76px}
+  h2{font-size:clamp(22px,5.6vw,30px);margin:0 0 4px}
+  .sub{color:var(--dim);font-size:15px;margin:0 0 16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:12px}
+  .card h3{font-size:19px;margin:0 0 8px}
+  .plain{background:#0B1A2E;border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin:12px 0 0;font-size:15.5px}
+  .plain b{color:var(--blue)}
+  .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    padding:4px 9px;border-radius:99px;background:#16213A;color:var(--dim);margin-bottom:10px}
+  .big{font-family:"JetBrains Mono",monospace;font-size:26px;line-height:1.2}
+  .steps{counter-reset:s;list-style:none;padding:0;margin:0}
+  .steps li{position:relative;padding-left:44px;margin-bottom:16px}
+  .steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;
+    width:30px;height:30px;border-radius:9px;background:#16213A;color:var(--amber);
+    font-family:"Space Grotesk";font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .steps b{color:var(--txt)}
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{text-align:left;padding:11px 8px;border-bottom:1px solid #1E2A42;vertical-align:top;word-break:break-word}
+  th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:700}
+  .acro{font-family:"JetBrains Mono",monospace;color:var(--green);font-weight:600;font-size:15px;white-space:nowrap}
+  .says{color:var(--dim);font-size:13.5px;font-style:italic}
+  .calc{background:linear-gradient(180deg,#0F172A,#0A1424);border:1px solid var(--line);border-radius:18px;padding:18px}
+  .calc label{display:block;font-size:13.5px;color:var(--dim);margin-bottom:6px;font-weight:600}
+  .calc .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  input[type=number]{width:100%;min-height:52px;background:#091120;border:1px solid #27344E;color:var(--txt);
+    border-radius:12px;padding:12px;font-size:17px;font-family:"JetBrains Mono",monospace}
+  input[type=number]:focus{outline:2px solid #2C4A72}
+  .answer{margin-top:14px;background:#0A241C;border:1px solid #1E5343;border-radius:12px;padding:14px}
+  .answer .lab{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);font-weight:700}
+  .answer .val{font-family:"JetBrains Mono",monospace;font-size:30px;color:#CFF5E8;margin-top:2px}
+  .answer .why{font-size:14.5px;color:#BCD9CE;margin-top:6px}
+  .ex{border-left:4px solid;padding:16px 16px 16px 18px}
+  .ex dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:10px 0 0;font-size:15px}
+  .ex dt{color:var(--dim)}
+  .ex dd{margin:0}
+  .quiz .q{font-weight:600;margin-bottom:8px}
+  .quiz .a{display:none;color:var(--green);font-size:15px;border-top:1px dashed #2A3752;padding-top:8px;margin-top:8px}
+  .quiz .a.show{display:block}
+  .quiz button{min-height:44px;width:100%;margin-top:6px}
+  button{font-family:Inter,sans-serif;font-size:14.5px;font-weight:700;padding:12px 16px;min-height:46px;
+    border-radius:11px;border:1px solid #2B3A58;background:#132039;color:var(--txt);cursor:pointer}
+  button.pri{background:var(--green);color:#04180F;border-color:var(--green)}
+  .rowbtn{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+  .rowbtn button{flex:1 1 45%}
+  .memo{background:#0F172A;border:1px solid var(--line);border-radius:18px;padding:18px}
+  .memo .qt{font-size:20px;font-family:"Space Grotesk";line-height:1.3}
+  .memo .an{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed #2A3752;color:var(--green);font-size:16px}
+  .memo .an.show{display:block}
+  .acro-grid{display:grid;gap:9px}
+  .acro-group{font-family:"Space Grotesk";font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin:14px 0 2px}
+  .acro-group:first-child{margin-top:0}
+  .acro-item{background:#0A1526;border:1px solid #1E2A42;border-radius:12px;padding:14px}
+  .acro-name{font-family:"JetBrains Mono",monospace;font-size:19px;color:var(--green);font-weight:700}
+  .acro-full{font-size:12px;color:var(--dim);margin-top:3px;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
+  .acro-mean{font-size:15.5px;margin-top:8px;line-height:1.5}
+  .says{display:block;color:#8FA3C2;font-style:italic;font-size:13.5px;margin-top:6px}
+  .warn{background:#2A1116;border:1px solid #5C2330;color:#FFD9DE;border-radius:12px;padding:14px;font-size:15px}
+  .tip{background:#2A2010;border:1px solid #5C4519;color:#FFEBC6;border-radius:12px;padding:14px;font-size:15px}
+  .foot{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);color:#6E7E9B;font-size:12.5px}
+  #top{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));width:48px;height:48px;
+    border-radius:50%;display:none;align-items:center;justify-content:center;background:#16213A;
+    border:1px solid #2B3A58;color:var(--txt);font-size:19px;z-index:40;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+  #top.on{display:flex}
+  @media (max-width:400px){ .calc .row{grid-template-columns:1fr} table{font-size:14px} }
+  @media print{body{background:#fff;color:#111}.card,.calc{background:#fff;border-color:#ccc}nav.chips,#top,.rowbtn{display:none}}
+</style>
+</head>
+<body>
+<noscript><div style="padding:12px 16px;background:#3A2A05;border-bottom:1px solid #6B4E0A;color:#FFEBC6;font:600 13px Inter,system-ui,sans-serif;text-align:center">The little calculator needs JavaScript. Everything else reads fine without it.</div></noscript>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Black Harbour · Plain English Edition · v2</div>
+  <h1>Real estate, explained from zero</h1>
+  <p class="lede">No background needed. One house. Round numbers. Every acronym spelled out in normal words.</p>
+  <nav class="chips">
+    <a href="#idea">The idea</a>
+    <a href="#house">One house</a>
+    <a href="#offer">Your safe offer</a>
+    <a href="#ways">5 ways to earn</a>
+    <a href="#words">Acronyms</a>
+    <a href="#rules">The rules</a>
+    <a href="#memorize">Memorize</a>
+  </nav>
+</header>
+
+<section id="idea">
+  <h2>The whole thing, in one paragraph</h2>
+  <p class="sub">If you only read one thing on this page, read this.</p>
+  <div class="card">
+    <p style="margin:0 0 12px">Imagine a friend sells used iPhones. He doesn't make money because phones are cool. He makes money because he buys a phone for <b>$200</b>, cleans it up, and sells it for <b>$400</b>. The phone didn't change. The <b>price</b> did.</p>
+    <p style="margin:0">Real estate is that, with houses. You don't make money by owning a house. You make money because you bought it <b>cheaper than it's worth</b> — and because you already know, before you sign, <b>who will buy or rent it</b>.</p>
+    <div class="plain"><b>In plain words:</b> buy low, know your exit, don't fall in love with the house.</div>
+  </div>
+  <div class="card">
+    <h3>Two questions before any deal</h3>
+    <ol class="steps" style="margin-top:12px">
+      <li><b>Am I paying less than it will be worth?</b><br><span style="color:var(--dim);font-size:15.5px">If not, there's no deal. Nicer kitchen won't save it.</span></li>
+      <li><b>Do I already know who takes it off my hands?</b><br><span style="color:var(--dim);font-size:15.5px">A buyer, a renter, a room renter. A name, not a hope.</span></li>
+    </ol>
+    <div class="plain"><b>In plain words:</b> if either answer is "I don't know", you don't have a deal — you have a wish.</div>
+  </div>
+</section>
+
+<section id="house">
+  <h2>One house, all the way through</h2>
+  <p class="sub">Every example on this page uses this same house. Learn it once and the rest is repetition.</p>
+
+  <div class="card">
+    <span class="tag">Our house</span>
+    <h3>A tired 3-bed house in Boynton Beach</h3>
+    <table>
+      <tr><td>Today it's ugly</td><td>old kitchen, bad floors, dated bathrooms</td></tr>
+      <tr><td>It needs about</td><td><b>$50,000</b> of work</td></tr>
+      <tr><td>Fixed up, houses like it sell for</td><td><b class="big" style="color:var(--green)">$400,000</b></td></tr>
+      <tr><td>The owner wants</td><td>$330,000</td></tr>
+    </table>
+    <div class="plain"><b>In plain words:</b> this house is a $400,000 house wearing $50,000 of damage. That gap is where the money lives.</div>
+  </div>
+
+  <div class="card">
+    <span class="tag" style="color:var(--amber)">Word you'll hear</span>
+    <h3>"ARV"</h3>
+    <p style="margin:0"><b>ARV</b> = <b>A</b>fter <b>R</b>epair <b>V</b>alue. It's just a fancy name for <b>the price after the work is done</b>.</p>
+    <div class="plain"><b>Like this:</b> the price of a car <i>after</i> you fix the dent. Our house's ARV is <b>$400,000</b>.</div>
+  </div>
+
+  <div class="card">
+    <span class="tag" style="color:var(--amber)">Word you'll hear</span>
+    <h3>"Comps"</h3>
+    <p style="margin:0">Short for <b>comparables</b> — three to five similar houses nearby that <b>actually sold</b> in the last few months. That's how you prove the ARV instead of guessing it.</p>
+    <div class="plain"><b>Like this:</b> checking what your old iPhone sells for on eBay before you price yours. Three real sales beat one opinion.</div>
+  </div>
+</section>
+
+<section id="offer">
+  <h2>Your highest safe offer</h2>
+  <p class="sub">This one number keeps you out of trouble. It's the most important thing on this page.</p>
+  <div class="card">
+    <p style="margin:0 0 14px">The work, in three steps:</p>
+    <ol class="steps">
+      <li><b>Take 70% of the fixed-up price.</b><br><span style="color:var(--dim);font-size:15.5px">$400,000 × 0.70 = <b style="color:var(--txt)">$280,000</b></span></li>
+      <li><b>Subtract the repair cost.</b><br><span style="color:var(--dim);font-size:15.5px">$280,000 − $50,000 = <b style="color:var(--txt)">$230,000</b></span></li>
+      <li><b>That's your ceiling. Offer less, never more.</b></li>
+    </ol>
+    <div class="plain"><b>Why 70%?</b> The other 30% is not profit — it pays the closing costs, the months you own it, the surprises, and the profit you actually want. Skip it and you work for free.</div>
+  </div>
+
+  <div class="calc">
+    <p style="margin:0 0 14px;font-weight:700">Try it on any house</p>
+    <div class="row">
+      <div><label>Fixed-up value (ARV)</label><input type="number" id="arv" value="400000" step="5000" inputmode="numeric"></div>
+      <div><label>Repair cost</label><input type="number" id="rep" value="50000" step="5000" inputmode="numeric"></div>
+    </div>
+    <div class="answer">
+      <div class="lab">Highest safe offer</div>
+      <div class="val" id="out">$230,000</div>
+      <div class="why" id="why">$400,000 × 70% = $280,000, minus $50,000 of work.</div>
+    </div>
+    <p style="margin:12px 0 0;font-size:13.5px;color:var(--dim)">On the $330,000 asking price, this house is <b style="color:var(--red)">$100,000 too expensive</b>. That's a negotiation, or a walk — not a deal.</p>
+  </div>
+</section>
+
+<section id="ways">
+  <h2>The five ways to earn</h2>
+  <p class="sub">Same house, five different businesses. This is what Santiago means by "salidas" — exits.</p>
+
+  <div class="card ex" style="border-left-color:var(--amber)">
+    <div class="tag" style="color:var(--amber)">1 · Wholesale</div>
+    <h3>You sell the <i>paper</i>, not the house</h3>
+    <p style="margin:0 0 8px;color:var(--dim);font-size:15.5px">You sign a contract to buy the house cheap, then sell <b>that contract</b> to another investor for a fee. You never own anything.</p>
+    <dl>
+      <dt>You earn</dt><dd>a fee, called an assignment fee</dd>
+      <dt>You need</dt><dd>a small deposit, usually $1,000–$5,000</dd>
+      <dt>How long</dt><dd>2 to 8 weeks</dd>
+      <dt>Watch out</dt><dd>you need a buyer lined up, and the seller must allow it</dd>
+    </dl>
+    <div class="plain"><b>Like this:</b> you put a deposit on a concert ticket, then sell your spot in line for more. You never went to the show.</div>
+  </div>
+
+  <div class="card ex" style="border-left-color:var(--red)">
+    <div class="tag" style="color:var(--red)">2 · Flip</div>
+    <h3>You buy it, fix it, sell it</h3>
+    <p style="margin:0 0 8px;color:var(--dim);font-size:15.5px">Buy at $230,000, spend $50,000, sell at $400,000.</p>
+    <dl>
+      <dt>You earn</dt><dd>the difference after all costs</dd>
+      <dt>You need</dt><dd>the most money of all five ways</dd>
+      <dt>How long</dt><dd>4 to 8 months</dd>
+      <dt>Watch out</dt><dd>repairs always cost more and take longer</dd>
+    </dl>
+    <div class="plain"><b>The math that matters:</b> every $10,000 you shave off the purchase price is $10,000 more profit. Nothing else moves the needle that hard.</div>
+  </div>
+
+  <div class="card ex" style="border-left-color:var(--green)">
+    <div class="tag" style="color:var(--green)">3 · Buy and hold</div>
+    <h3>You rent it and keep it</h3>
+    <p style="margin:0 0 8px;color:var(--dim);font-size:15.5px">One family pays you rent every month. The house slowly becomes worth more.</p>
+    <dl>
+      <dt>You earn</dt><dd>monthly cash, plus value growth</dd>
+      <dt>You need</dt><dd>about 20–25% down from a bank</dd>
+      <dt>How long</dt><dd>years — this is the slow one</dd>
+      <dt>Watch out</dt><dd>empty months, repairs, insurance</dd>
+    </dl>
+    <div class="plain"><b>Like this:</b> buying a vending machine instead of selling snacks one by one.</div>
+  </div>
+
+  <div class="card ex" style="border-left-color:var(--violet)">
+    <div class="tag" style="color:var(--violet)">4 · Coliving</div>
+    <h3>You rent it by the room</h3>
+    <p style="margin:0 0 8px;color:var(--dim);font-size:15.5px">Instead of one family paying $3,200, five people pay $950 each.</p>
+    <dl>
+      <dt>You earn</dt><dd>more rent from the same house</dd>
+      <dt>You need</dt><dd>furniture, about $3,000–$4,000 per room</dd>
+      <dt>How long</dt><dd>weeks to fill, then constant work</dd>
+      <dt>Watch out</dt><dd>the city may not allow it, and bills are on you</dd>
+    </dl>
+    <div class="plain"><b>Like this:</b> selling a pizza by the slice instead of whole. More money per pizza — but only if the slices sell.</div>
+    <div class="tip" style="margin-top:12px"><b>The honest math:</b> $57,000 a year by the room vs $38,400 to one family looks amazing. Subtract ~$12,000 of bills, furniture and cleaning, and you need <b>4 of the 5 rooms filled</b> just to beat the family. Know that before you fall for the idea.</div>
+  </div>
+
+  <div class="card ex" style="border-left-color:var(--blue)">
+    <div class="tag" style="color:var(--blue)">5 · Multifamily</div>
+    <h3>A building with several units</h3>
+    <p style="margin:0 0 8px;color:var(--dim);font-size:15.5px">A duplex, a 4-plex, a 20-unit building. Each unit has its own rent.</p>
+    <dl>
+      <dt>You earn</dt><dd>many rents at once</dd>
+      <dt>You need</dt><dd>the biggest down payment of all</dd>
+      <dt>How long</dt><dd>long hold; the value grows as rent grows</dd>
+      <dt>Watch out</dt><dd>bigger loans, bigger repairs</dd>
+    </dl>
+    <div class="plain"><b>Like this:</b> an apartment building is a small business that happens to be made of walls.</div>
+  </div>
+</section>
+
+<section id="words">
+  <h2>Every acronym and jargon word, decoded</h2>
+  <p class="sub">These are the exact letters that get thrown at you. Nobody explains them. Here they are.</p>
+
+  <div class="card">
+    <div class="acro-grid">
+<div class="acro-group">About the house and the price</div>
+<div class="acro-item"><div class="acro-name">ARV</div><div class="acro-full">After Repair Value</div><div class="acro-mean">The price after the work is done.<span class="says">"What the house is worth fixed up."</span></div></div>
+<div class="acro-item"><div class="acro-name">Comps</div><div class="acro-full">Comparables</div><div class="acro-mean">Three to five nearby houses that recently sold, used to prove a price.<span class="says">"The proof, not the guess."</span></div></div>
+<div class="acro-item"><div class="acro-name">PP</div><div class="acro-full">Purchase Price</div><div class="acro-mean">What you agree to pay.<span class="says">"The number everything starts from."</span></div></div>
+<div class="acro-item"><div class="acro-name">MAO</div><div class="acro-full">Maximum Allowable Offer</div><div class="acro-mean">The most you can pay and still make money.<span class="says">"My ceiling."</span></div></div>
+<div class="acro-item"><div class="acro-name">EMD</div><div class="acro-full">Earnest Money Deposit</div><div class="acro-mean">The deposit that says I'm serious — held by a title company, never in your pocket.<span class="says">"My good-faith money."</span></div></div>
+<div class="acro-item"><div class="acro-name">DOM</div><div class="acro-full">Days on Market</div><div class="acro-mean">How long it's been for sale. A long time means the seller may be getting tired.<span class="says">"How stale is this listing."</span></div></div>
+<div class="acro-item"><div class="acro-name">MLS</div><div class="acro-full">Multiple Listing Service</div><div class="acro-mean">The main listing database agents use.<span class="says">"The public menu of houses."</span></div></div>
+<div class="acro-item"><div class="acro-name">CMA</div><div class="acro-full">Comparative Market Analysis</div><div class="acro-mean">An agent's report of what nearby houses sold for.<span class="says">"Comps with a cover page."</span></div></div>
+<div class="acro-item"><div class="acro-name">REO</div><div class="acro-full">Real Estate Owned</div><div class="acro-mean">A house the bank took back and is now selling.<span class="says">"The bank's leftovers."</span></div></div>
+<div class="acro-item"><div class="acro-name">COE</div><div class="acro-full">Close of Escrow / Closing</div><div class="acro-mean">The day the money changes hands and you own it.<span class="says">"The finish line."</span></div></div>
+<div class="acro-group">About the building and the money</div>
+<div class="acro-item"><div class="acro-name">NOI</div><div class="acro-full">Net Operating Income</div><div class="acro-mean">What the building earns in a year after bills, before the loan payment.<span class="says">"Profit before the bank."</span></div></div>
+<div class="acro-item"><div class="acro-name">ROI</div><div class="acro-full">Return on Investment</div><div class="acro-mean">What you got back compared to what you put in. Put in $100, make $20 — that's 20%.<span class="says">"How hard my money worked."</span></div></div>
+<div class="acro-item"><div class="acro-name">COC</div><div class="acro-full">Cash-on-Cash return</div><div class="acro-mean">Like ROI, but only the cash that lands in your pocket each year vs the cash you put down.<span class="says">"My yearly paycheck per dollar invested."</span></div></div>
+<div class="acro-item"><div class="acro-name">DSCR</div><div class="acro-full">Debt Service Coverage Ratio</div><div class="acro-mean">Do the rents cover the loan payment? 1.20 means rent is 20% more than the payment.<span class="says">"Does the building pay for itself?"</span></div></div>
+<div class="acro-item"><div class="acro-name">LTV</div><div class="acro-full">Loan-to-Value</div><div class="acro-mean">The loan divided by the value. 75% LTV means the bank owns three quarters.<span class="says">"How much of the house the bank owns."</span></div></div>
+<div class="acro-item"><div class="acro-name">PITI</div><div class="acro-full">Principal, Interest, Taxes, Insurance</div><div class="acro-mean">The four pieces of a monthly mortgage payment.<span class="says">"What I pay every month, all in."</span></div></div>
+<div class="acro-item"><div class="acro-name">DTI</div><div class="acro-full">Debt-to-Income</div><div class="acro-mean">How much of your monthly income is already promised to other debts.<span class="says">"How stretched I look to a bank."</span></div></div>
+<div class="acro-item"><div class="acro-name">Cap rate</div><div class="acro-full">Capitalization rate</div><div class="acro-mean">The building's yearly profit divided by its price — a score for how hard it works.<span class="says">"Its interest rate, kind of."</span></div></div>
+<div class="acro-group">About the people and the rules</div>
+<div class="acro-item"><div class="acro-name">HOA</div><div class="acro-full">Homeowners Association</div><div class="acro-mean">Neighborhood club with fees and rules — it can ban renting rooms.<span class="says">"The private rulebook."</span></div></div>
+<div class="acro-item"><div class="acro-name">PM</div><div class="acro-full">Property Manager</div><div class="acro-mean">The person who handles the tenants for you.<span class="says">"My spare hands."</span></div></div>
+<div class="acro-item"><div class="acro-name">SFR</div><div class="acro-full">Single-Family Residence</div><div class="acro-mean">A normal house for one household.<span class="says">"One family, one house."</span></div></div>
+<div class="acro-item"><div class="acro-name">Turn</div><div class="acro-full">Turn / make-ready</div><div class="acro-mean">Getting a unit ready for the next renter. That's the BH Rentals business.<span class="says">"Between tenants, start to finish."</span></div></div>
+  </div>
+
+  <div class="card">
+    <h3>Words that aren't acronyms but matter just as much</h3>
+    <div class="acro-grid" style="margin-top:12px">
+<div class="acro-item"><div class="acro-name" style="font-size:17px">Comps</div><div class="acro-mean" style="margin-top:6px">Three to five nearby houses that recently sold, used to prove a price.</div></div><div class="acro-item"><div class="acro-name" style="font-size:17px">Title</div><div class="acro-mean" style="margin-top:6px">The house's background check — who really owns it and what's owed.</div></div><div class="acro-item"><div class="acro-name" style="font-size:17px">Lien</div><div class="acro-mean" style="margin-top:6px">A debt stuck to the house, like a bill that follows it.</div></div><div class="acro-item"><div class="acro-name" style="font-size:17px">Escrow</div><div class="acro-mean" style="margin-top:6px">A neutral person holding the money so nobody gets cheated.</div></div><div class="acro-item"><div class="acro-name" style="font-size:17px">Due diligence</div><div class="acro-mean" style="margin-top:6px">The window where you inspect it and can still walk away.</div></div><div class="acro-item"><div class="acro-name" style="font-size:17px">Assignment</div><div class="acro-mean" style="margin-top:6px">Handing your contract to another buyer — that's what wholesale means.</div></div><div class="acro-item"><div class="acro-name" style="font-size:17px">Hard money</div><div class="acro-mean" style="margin-top:6px">Fast, expensive short-term money from a person, not a bank.</div></div><div class="acro-item"><div class="acro-name" style="font-size:17px">Cash buyer</div><div class="acro-mean" style="margin-top:6px">Someone who pays without needing a loan.</div></div><div class="acro-item"><div class="acro-name" style="font-size:17px">Off-market</div><div class="acro-mean" style="margin-top:6px">Not listed publicly — you found it yourself.</div></div><div class="acro-item"><div class="acro-name" style="font-size:17px">Doc stamps</div><div class="acro-mean" style="margin-top:6px">Florida's tax on the sale papers: 70 cents per $100.</div></div><div class="acro-item"><div class="acro-name" style="font-size:17px">Turn</div><div class="acro-mean" style="margin-top:6px">Getting a unit ready for the next renter. That's the BH Rentals business.</div></div><div class="acro-item"><div class="acro-name" style="font-size:17px">Exit</div><div class="acro-mean" style="margin-top:6px">How the money comes back out. The whole point.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="rules">
+  <h2>The rule that decides if coliving is even legal</h2>
+  <p class="sub">Santiago wrote one line about this: "not every house can be run this way." Here's what it means where you live.</p>
+  <div class="card">
+    <h3>Palm Beach County, in simple terms</h3>
+    <ul style="margin:10px 0 0;padding-left:20px;font-size:16px">
+      <li>Up to <b>4 unrelated people</b> in one house = a normal family. Legal.</li>
+      <li><b>5 or more</b> = the county treats it as a business, with permits and zoning rules.</li>
+      <li>The county only allows that in certain zones — usually not normal single-family streets.</li>
+      <li>Every sleeping room needs at least <b>70 square feet</b>.</li>
+    </ul>
+    <div class="plain"><b>In plain words:</b> four roommates is a family. Five is a business the county regulates.</div>
+  </div>
+  <div class="card">
+    <h3>And it's the city, not the county</h3>
+    <p style="margin:0">Most addresses in Palm Beach County are inside a city — Boynton Beach, Delray, Boca, West Palm, Lake Worth, Wellington. Each one writes its own rules, and many are stricter.</p>
+    <div class="plain"><b>In plain words:</b> before anyone promises "we'll put 6 rooms in this house", you check the exact address with that city. One phone call saves a lawsuit.</div>
+  </div>
+  <div class="warn" style="margin-top:12px"><b>This is studying, not legal advice.</b> Before Black Harbour runs one coliving house, a Florida lawyer confirms the room count for that address in writing.</div>
+</section>
+
+<section id="memorize">
+  <h2>If you remember five things</h2>
+  <div class="card">
+    <ol class="steps">
+      <li><b>You get paid on the buy.</b> Bad entry, bad deal — every time.</li>
+      <li><b>Highest safe offer = 70% of the fixed price, minus repairs.</b> $400,000 × .70 − $50,000 = $230,000.</li>
+      <li><b>Five exits:</b> wholesale (sell the contract), flip (sell the house), rent it, rent by the room, rent many units.</li>
+      <li><b>Four unrelated people is a family</b> in Palm Beach County. Five needs zoning.</li>
+      <li><b>In Florida, insurance kills more deals than price.</b> Get the quote early.</li>
+    </ol>
+  </div>
+
+  <h3 style="margin:26px 0 10px;font-size:20px">Say it back — 8 questions</h3>
+  <div id="quiz"></div>
+
+  <h3 style="margin:26px 0 10px;font-size:20px">Cards to keep in your pocket</h3>
+  <div class="memo">
+    <div class="qt" id="mq">Loading…</div>
+    <div class="an" id="ma"></div>
+    <div class="rowbtn">
+      <button class="pri" id="mrev">Show answer</button>
+      <button id="mnext">Next →</button>
+    </div>
+    <div style="margin-top:10px;font-size:12.5px;color:var(--dim)" id="mcnt"></div>
+  </div>
+</section>
+
+<section id="next">
+  <h2>What to do this week</h2>
+  <div class="card">
+    <ol class="steps">
+      <li><b>Pull 3 real listings</b> on Zillow in Palm Beach County. For each: what would it sell for fixed up, and what repairs does it need? Write the two numbers.</li>
+      <li><b>Run the offer number</b> on all three. Compare with the asking price. Do it by hand once.</li>
+      <li><b>Call your city's zoning line</b> for one address and ask one question: "How many unrelated people can live in this house?" Write down the answer and the person's name.</li>
+    </ol>
+    <div class="plain"><b>That's it.</b> Three houses and one phone call teaches you more than ten hours of videos.</div>
+  </div>
+</section>
+
+<div class="foot">
+  <b style="color:#9BAAC6">Version 2 — plain English, 25 Nov 2026</b><br>
+  Built for Juan from Santiago Campillo's doc "Real estate game - Black Harbour (para Juan)" · 24 Nov 2026<br>
+  Palm Beach County room rule and 70 sq ft from county zoning documents; Florida doc stamps from the Florida Department of Revenue.<br>
+  Numbers are teaching examples, not market quotes. Not legal or tax advice — a Florida attorney and CPA confirm before money moves.
+</div>
+
+</div>
+<button id="top" aria-label="Back to top">↑</button>
+
+<script>
+const money = n => "$" + Math.round(n).toLocaleString("en-US");
+
+// ---- offer calculator ----
+function calc(){
+  const arv = +document.getElementById("arv").value || 0;
+  const rep = +document.getElementById("rep").value || 0;
+  const base = arv * 0.70;
+  const out = base - rep;
+  document.getElementById("out").textContent = money(out);
+  document.getElementById("why").innerHTML =
+    money(arv) + " × 70% = " + money(base) + ", minus " + money(rep) + " of work.";
+}
+["arv","rep"].forEach(id => document.getElementById(id).addEventListener("input", calc));
+calc();
+
+// ---- quiz ----
+const quiz = [
+  ["You buy a house for $200,000 that's worth $400,000 — but nobody wants to buy or rent it. Do you have a deal?",
+   "No. You have half of one. Good price, no exit. Walk."],
+  ["In normal words, what is ARV?",
+   "The price the house sells for after the repairs are done."],
+  ["Fixed-up value $300,000, repairs $40,000. What's your highest safe offer?",
+   "$300,000 × 70% = $210,000, minus $40,000 = $170,000."],
+  ["You spend $10,000 less on the purchase price. How much more profit do you make?",
+   "About $10,000. Dollar for dollar. That's why the buy is everything."],
+  ["Name the five exits.",
+   "Wholesale (sell the contract), flip (sell the house), buy and hold (rent it), coliving (rent by the room), multifamily (many units)."],
+  ["What's the difference between wholesale and flip?",
+   "Wholesale: you sell your contract and never own the house. Flip: you buy it, fix it, and sell it."],
+  ["In Palm Beach County, how many unrelated people can share a house before it becomes a business?",
+   "Four. Above four it's a regulated facility, and only allowed in certain zones."],
+  ["A property makes $50,000 a year before the loan, and the loan costs $40,000 a year. Is the rent covering the debt?",
+   "Yes — $50,000 ÷ $40,000 = 1.25. That's the DSCR: rent is 25% more than the payment. Most lenders want 1.20 or higher."]
+];
+const qbox = document.getElementById("quiz");
+quiz.forEach(([q,a], i) => {
+  const d = document.createElement("div");
+  d.className = "card quiz";
+  d.innerHTML = '<div class="q">' + (i+1) + '. ' + q + '</div>' +
+                '<div class="a">' + a + '</div>' +
+                '<button>Show answer</button>';
+  const btn = d.querySelector("button"), ans = d.querySelector(".a");
+  btn.onclick = () => { ans.classList.toggle("show"); btn.textContent = ans.classList.contains("show") ? "Hide" : "Show answer"; };
+  qbox.appendChild(d);
+});
+
+// ---- pocket cards ----
+const cards = [
+  ["What decides whether a real estate deal makes money?", "The price you buy at, and whether you already know who buys or rents it."],
+  ["ARV means…", "After Repair Value — the price after the work is done."],
+  ["The highest safe offer formula?", "70% of the fixed-up value, minus the repair cost."],
+  ["$400,000 fixed up, $50,000 of repairs. Highest safe offer?", "$230,000."],
+  ["What are comps?", "Three to five nearby houses that actually sold recently — your proof of value."],
+  ["Wholesale in one line?", "You sell the contract, not the house, and keep a fee."],
+  ["Flip in one line?", "Buy cheap, fix it, sell at the higher price."],
+  ["Buy and hold in one line?", "Rent it to one family and keep it for years."],
+  ["Coliving in one line?", "Rent the same house to several people, room by room."],
+  ["Multifamily in one line?", "A building with several units, each paying rent."],
+  ["Why do people like coliving?", "The same house earns more rent in pieces than as one rental."],
+  ["What's the catch with coliving?", "Extra bills, furniture and cleaning — and the city may cap how many unrelated people can live there."],
+  ["Palm Beach County room rule?", "Up to 4 unrelated people = a family. More needs special zoning."],
+  ["NOI means…", "What the building earns in a year before the loan payment."],
+  ["Cap rate means…", "Yearly profit divided by price — a score for how hard the property works."],
+  ["DSCR means…", "Does the rent cover the loan? 1.20 = rent is 20% more than the payment."],
+  ["LTV means…", "Loan divided by value. 75% LTV = the bank owns three quarters."],
+  ["Earnest money means…", "A deposit that shows you're serious. Held by a title company, not in your pocket."],
+  ["Biggest hidden deal-killer in Florida?", "Insurance. Old roofs and storm risk can make a house uninsurable or very expensive."],
+  ["What's your first move this week?", "Pull 3 listings, estimate the fixed-up value and repairs, and run the 70% offer number on each."]
+];
+let ci = 0;
+function drawCard(){
+  document.getElementById("mq").textContent = cards[ci][0];
+  document.getElementById("ma").textContent = cards[ci][1];
+  document.getElementById("ma").classList.remove("show");
+  document.getElementById("mcnt").textContent = (ci+1) + " of " + cards.length;
+}
+document.getElementById("mrev").onclick = () => document.getElementById("ma").classList.toggle("show");
+document.getElementById("mnext").onclick = () => { ci = (ci+1) % cards.length; drawCard(); };
+drawCard();
+
+// ---- back to top ----
+const tt = document.getElementById("top");
+addEventListener("scroll", () => tt.classList.toggle("on", scrollY > 700), {passive:true});
+tt.onclick = () => scrollTo({top:0, behavior:"smooth"});
+</script>
+</body>
+</html>
